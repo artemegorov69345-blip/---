@@ -1,0 +1,35 @@
+TЕРМИНАЛЫ(ТОКЕНЫ ЛЕКСЕРА)
+
+IDENT       — имя переменной (x, myVar, _count)
+INT         — целое число (42, 0, 100)
+FLOAT       — дробное число (3.14, 0.5)
+STRING      — строка в кавычках ("hello", "x = ")
+
+OP          — операторы: +, -, *, /, =, (, ), ;
+
+Keywords:
+  "let"     — объявление переменной
+  "print"   — вывод в консоль
+
+EOF         — конец файла
+
+
+НЕТЕРМИНАЛЫ (ПРАВИЛА ГРАММАТИКИ)
+
+Program   = { Stmt } EOF ;
+
+Stmt      = VarDecl | PrintStmt ;
+
+VarDecl   = "let" IDENT "=" Expr ";" ;
+
+PrintStmt = "print" "(" ArgList ")" ";" ;
+
+ArgList   = Expr { "," Expr } ;
+
+Expr      = Term { ("+" | "-") Term } ;
+
+Term      = Factor { ("*" | "/") Factor } ;
+
+Factor    = [ "-" ] Primary ;
+
+Primary   = INT | FLOAT | STRING | IDENT | "(" Expr ")" ;
